@@ -107,10 +107,11 @@
     font-weight: 600;
     border: 1px solid var(--color-emerald);
     color: var(--color-emerald);
-    transition: color 0.4s ease-in-out, background-color 0.4s ease-in-out, fill 0.4s ease-in-out;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .clients__btn svg {
+    transition: fill 0.3s ease-in-out;;
     fill: var(--color-emerald);
 }
 
