@@ -1,4 +1,5 @@
 import {svgAddUser} from "./svg.js";
+import {addClientModal} from "./addClient.js";
 
 export const createClientsSection = () => {
     const section = document.createElement('section')
@@ -54,6 +55,10 @@ export const createClientsSection = () => {
     sortingDisplayActions.textContent = 'Действия';
     addUserBtn.textContent = 'Добавить клиента';
     addUserBtnSvg.innerHTML = svgAddUser;
+
+    addUserBtn.addEventListener('click', ()=>{
+        document.body.append(addClientModal())
+    })
 
     main.append(section);
     section.append(container);
