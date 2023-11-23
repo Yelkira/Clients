@@ -1,4 +1,5 @@
 import {svgContactDefault, svgContactHover} from "./svg.js";
+import {createContactItem} from "./createContact.js";
 
 export const createClientsForm = () => {
     const modalTitle = document.createElement('h2');
@@ -75,6 +76,31 @@ export const createClientsForm = () => {
     contactsBlock.append(addContactBtn);
     form.append(formFloatingName, formFloatingSurname, formFloatingLastName, contactsBlock, saveBtn, cancelBtn);
     addContactBtn.append(contactBtnSvgDefault, contactBtnSvgHover)
+
+    addContactBtn.addEventListener('click', (e) => {
+        e.preventDefault()
+        const contactsItem = document.getElementsByClassName('contact')
+
+        if (contactsItem.length < 9) {
+            const contactItem = createContactItem()
+            contactsBlock.prepend(contactItem.contact)
+            contactsBlock.style.backgroundColor = 'var(--color-athens-gray)'
+        } else {
+            const contactItem = createContactItem()
+            contactsBlock.prepend(contactItem.contact)
+            addContactBtn.classList.remove('modal__btn-contact--active')
+        }
+    })
+
+    addContactBtn.addEventListener('mousemove', () => {
+        contactBtnSvgDefault.classList.remove('btn-contact__svg--active')
+        contactBtnSvgHover.classList.add('btn-contact__svg--active')
+    });
+    addContactBtn.addEventListener('mouseleave', () => {
+        contactBtnSvgDefault.classList.add('btn-contact__svg--active')
+        contactBtnSvgHover.classList.remove('btn-contact__svg--active')
+    });
+
 
     return {
         form,
