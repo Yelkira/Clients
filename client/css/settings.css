@@ -69,6 +69,9 @@ a {
     --color-emerald: #34C759;
     --color-black3: #333;
     --color-gray-suit: #C8C5D1;
+    --color-mischka: #e7e5eb;
+    --color-athens-gray: #f4f3f6;
+    --color-burnt-sienna: #f06a4d;
 }
 
 .container {
@@ -87,6 +90,28 @@ a {
     height: 100%;
     background: #00000080;
     opacity: 0;
+}
+.site-tooltip {
+    position: absolute;
+    top: -41px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+    padding: 7px 15px;
+    background-color: var(--color-black3);
+}
+.site-tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: -9px;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    transform: translateX(-50%);
+    clip-path: polygon(100% 0, 0 0, 51% 100%);
+    background-color: var(--color-black3);
 }
 .site-modal__content {
     max-width: 450px;
