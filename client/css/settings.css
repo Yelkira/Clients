@@ -58,12 +58,17 @@ a {
     border: none;
     background-color: transparent;
 }
-
+.site-btn{
+    background-color: var(--color-emerald);
+    color: var(--color-white);
+}
 :root {
     --color-white: #ffffff;
     --color-wild-sand: #f5f5f5;
     --color-silver-chalice: #b0b0b0;
     --color-emerald: #34C759;
+    --color-black3: #333;
+    --color-gray-suit: #C8C5D1;
 }
 
 .container {
