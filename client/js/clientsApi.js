@@ -2,9 +2,7 @@ export const getClients = async () => {
     const res = await fetch('http://localhost:3000/api/clients', {
         method: 'GET'
     })
-    const data = await res.json()
-    console.log(data)
-    return data
+    return await res.json()
 }
 
 export const createClient = async (client) => {
@@ -12,7 +10,11 @@ export const createClient = async (client) => {
         method: 'POST',
         body: JSON.stringify(client)
     })
-    const data = await res.json()
-    console.log(data)
-    return data
+    return await res.json()
+}
+
+export const deleteClientItem = async (id) => {
+    const res = await fetch(`http://localhost:3000/api/clients/${id}`, {
+        method: 'DELETE',
+    })
 }
