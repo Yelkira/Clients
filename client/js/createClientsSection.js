@@ -24,7 +24,34 @@ export const createClientsSection = () => {
     const createSpan = document.createElement('span');
     const editSpan = document.createElement('span');
 
+    const sortDisplayItems  = [sortingDisplayId, sortingDisplayName, sortingDisplayCreate, sortingDisplayEdit];
 
+    for(const item of sortDisplayItems) {
+       item.addEventListener('click', () => {
+           if(item.classList.contains('sort-down')) {
+               item.classList.remove('sort-down');
+               item.classList.add('sort-up');
+           } else{
+               item.classList.add('sort-down');
+               item.classList.remove('sort-up');
+           }
+       })
+    }
+    sortingDisplayCreate.addEventListener('click', () => {
+        if(sortingDisplayCreate.classList.contains('sort-down')) {
+            createSpan.classList.add('sort-up');
+        } else {
+            createSpan.classList.remove('sort-up');
+        }
+    });
+
+    sortingDisplayEdit.addEventListener('click', () => {
+        if(sortingDisplayEdit.classList.contains('sort-down')) {
+            editSpan.classList.add('sort-up');
+        } else {
+            editSpan.classList.remove('sort-up');
+        }
+    });
 
     sortingDisplayId.setAttribute('data-type', 'id');
     sortingDisplayName.setAttribute('data-type', 'text');
