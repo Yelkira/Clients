@@ -96,10 +96,10 @@ export const createClientItem = (data) => {
             clientEdit.classList.remove('action-wait')
         }, 1000)
     })
-    /*data.id.substring(0, 6)*/
+
     deleteSpinner.innerHTML = svgSpinner
     editSpinner.innerHTML = svgSpinner
-    clientId.textContent = Math.floor(Math.random()*15)
+    clientId.textContent = data.id.substring(0, 6)
     clientName.textContent = data.name;
     clientSureName.textContent = data.surname;
     clientLastName.textContent = data.lastName;
