@@ -26,9 +26,23 @@ export const editClientModal = (data) => {
 
         import('./clientsApi.js').then(({deleteClientItem}) => {
             deleteModal.deleteModalDelete.addEventListener('click', (e) => {
-                deleteClientItem(data.id).then(r => {
-                    document.getElementById(data.id).remove()
-                });
+                try {
+                    deleteModal.deleteSpinner.style.display = 'block'
+                    setTimeout(() => {
+                        deleteClientItem(data.id).then(r => {
+                            document.getElementById(data.id).remove()
+                            deleteModal.deleteModal.remove()
+                            document.querySelector('.modal-edit').remove()
+                        })
+                    }, 1500)
+
+                } catch (e) {
+                    console.log(e)
+                } finally {
+                    setTimeout(() => {
+                        deleteModal.deleteSpinner.style.display = 'none'
+                    }, 1500)
+                }
             })
         })
     })

@@ -1,6 +1,7 @@
 import {createContactItemByType, formatDate, formatTime} from "./utils.js";
 import {deleteClientModal} from "./createDeleteModal.js";
 import {editClientModal} from "./editClient.js";
+import {svgSpinner} from "./svg.js";
 
 export const createClientItem = (data) => {
     const clientTr = document.createElement('tr');
@@ -19,10 +20,14 @@ export const createClientItem = (data) => {
     const clientActions = document.createElement('td');
     const clientEdit = document.createElement('button');
     const clientDelete = document.createElement('button');
+    const editSpinner = document.createElement('span');
+    const deleteSpinner = document.createElement('span');
 
     const deleteClient = deleteClientModal()
     const editCLient = editClientModal(data)
 
+    editSpinner.classList.add('actions__spinner');
+    deleteSpinner.classList.add('actions__spinner');
     clientTr.classList.add('clients__item');
     clientTr.id = data.id;
     clientId.classList.add('client__id');
@@ -72,14 +77,27 @@ export const createClientItem = (data) => {
     }
 
     clientDelete.addEventListener('click', () => {
-        deleteById()
-        document.body.append(deleteClient.deleteModal)
+        deleteSpinner.style.display = 'block'
+        clientDelete.classList.add('action-wait')
+        setTimeout(() => {
+            deleteById()
+            document.body.append(deleteClient.deleteModal)
+            deleteSpinner.style.display = 'none'
+            clientDelete.classList.remove('action-wait')
+        }, 1000)
     })
     clientEdit.addEventListener('click', () => {
-        document.body.append(editCLient.editModal)
+        editSpinner.style.display = 'block'
+        clientEdit.classList.add('action-wait')
+        setTimeout(() => {
+            document.body.append(editCLient.editModal)
+            editSpinner.style.display = 'none'
+            clientEdit.classList.remove('action-wait')
+        }, 1000)
     })
 
-
+    deleteSpinner.innerHTML = svgSpinner
+    editSpinner.innerHTML = svgSpinner
     clientId.textContent = data.id.substring(0, 6)
     clientName.textContent = data.name;
     clientSureName.textContent = data.surname;
@@ -94,6 +112,8 @@ export const createClientItem = (data) => {
     clientFullName.append(clientName, clientSureName, clientLastName)
     clientCreated.append(createdDate, createdTime)
     clientChanged.append(changedDate, changedTime)
+    clientDelete.append(deleteSpinner)
+    clientEdit.append(editSpinner)
     clientActions.append(clientEdit, clientDelete)
     clientTr.append(
         clientId,
