@@ -1,5 +1,6 @@
 import {svgAddUser} from "./svg.js";
 import {addClientModal} from "./addClient.js";
+import {createPreloader} from "./preloader.js";
 
 export const createClientsSection = () => {
     const section = document.createElement('section')
@@ -75,6 +76,7 @@ export const createClientsSection = () => {
     sortingDisplay.append(theadTr);
     tableWrapper.append(clientsTable);
     clientsTable.append(sortingDisplay, tbody);
+    tbody.append(createPreloader())
     addUserBtn.append(addUserBtnSvg);
     container.append(h1, tableWrapper, addUserBtn);
 
