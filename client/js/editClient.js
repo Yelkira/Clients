@@ -2,6 +2,7 @@ import {createClientsForm} from "./createModalForm.js";
 import {deleteClientModal} from "./createDeleteModal.js";
 import {createContactItem} from "./createContact.js";
 import {sendCLientData} from "./clientsApi.js";
+import {createClientItem} from "./createClientItem.js";
 
 export const editClientModal = (data) => {
     const editModal = document.createElement('div');
@@ -72,12 +73,10 @@ export const editClientModal = (data) => {
         client.lastName = createForm.inputLastName.value;
         client.contacts = contacts;
 
-        try {
-            await sendCLientData(client, 'PATCH', data.id)
-            editModal.remove()
-        } catch (error) {
-            console.log(error)
-        }
+        const editedData= await sendCLientData(client, 'PATCH', data.id)
+        document.getElementById(editedData.id).remove()
+        document.querySelector('.clients__tbody').append(createClientItem(editedData))
+        document.querySelector('.edit-modal').remove()
     })
 
     createForm.modalTitle.append(titleId);

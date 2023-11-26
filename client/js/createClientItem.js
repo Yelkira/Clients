@@ -43,17 +43,18 @@ export const createClientItem = (data) => {
     clientEdit.classList.add('clients__edit', 'btn-reset');
 
 
-    for(const contact of data.contacts){
+    for (const contact of data.contacts) {
         createContactItemByType(contact.type, contact.value, clientContacts)
     }
 
     const deleteById = () => {
-        import('./clientsApi.js').then(({deleteClientItem})=>{
-            deleteClient.deleteModalDelete.addEventListener('click', ()=>{
-                deleteClientItem(data.id).then(r =>{
-                        deleteClient.deleteModal.remove()
-                } )
-                document.getElementById(data.id).remove()
+        import('./clientsApi.js').then(({deleteClientItem}) => {
+            deleteClient.deleteModalDelete.addEventListener('click', () => {
+                deleteClientItem(data.id).then(r => {
+                    document.getElementById(data.id).remove()
+                    deleteClient.deleteModal.remove()
+                })
+
             })
         })
     }

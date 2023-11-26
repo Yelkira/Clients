@@ -2,6 +2,7 @@ import {createClientsForm} from "./createModalForm.js";
 import {sendCLientData} from "./clientsApi.js";
 import {validateClientForm} from "./validateForm.js";
 import {validateClientContact} from "./validateContact.js";
+import {createClientItem} from "./createClientItem.js";
 
 export const addClientModal = () => {
     const createForm = createClientsForm()
@@ -17,7 +18,7 @@ export const addClientModal = () => {
 
     createForm.form.addEventListener('submit', async (e) => {
         e.preventDefault()
-        if(!validateClientForm()){
+        if (!validateClientForm()) {
             return
         }
         const contactTypes = document.querySelectorAll('.contact__name')
@@ -25,7 +26,7 @@ export const addClientModal = () => {
         let contacts = []
         let clientObject = {}
         for (let i = 0; i < contactTypes.length; i++) {
-            if (!validateClientContact(contactTypes[i], contactValues[i])){
+            if (!validateClientContact(contactTypes[i], contactValues[i])) {
                 return
             }
 
@@ -40,9 +41,9 @@ export const addClientModal = () => {
         clientObject.lastName = createForm.inputLastName.value
         clientObject.contacts = contacts
 
-        if(validateClientForm()){
-            await sendCLientData(clientObject, 'POST')
-        }
+        const data = await sendCLientData(clientObject, 'POST')
+        document.querySelector('.clients__tbody').append(createClientItem(data))
+        document.querySelector('.modal').remove()
     })
 
     createForm.modalClose.addEventListener('click', (e) => {

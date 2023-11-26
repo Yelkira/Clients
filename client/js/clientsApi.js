@@ -15,6 +15,7 @@ export const sendCLientData = async (client, method, id = null) => {
             method,
             body: JSON.stringify(client)
         })
+        return await res.json()
     } catch (e) {
         console.log(e)
     }
