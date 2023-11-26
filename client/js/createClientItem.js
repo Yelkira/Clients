@@ -50,10 +50,22 @@ export const createClientItem = (data) => {
     const deleteById = () => {
         import('./clientsApi.js').then(({deleteClientItem}) => {
             deleteClient.deleteModalDelete.addEventListener('click', () => {
-                deleteClientItem(data.id).then(r => {
-                    document.getElementById(data.id).remove()
-                    deleteClient.deleteModal.remove()
-                })
+                try {
+                    deleteClient.deleteSpinner.style.display = 'block'
+                    setTimeout(() => {
+                        deleteClientItem(data.id).then(r => {
+                            document.getElementById(data.id).remove()
+                            deleteClient.deleteModal.remove()
+                        })
+                    }, 1500)
+
+                } catch (e) {
+                    console.log(e)
+                } finally {
+                    setTimeout(() => {
+                        deleteClient.deleteSpinner.style.display = 'none'
+                    }, 1500)
+                }
 
             })
         })

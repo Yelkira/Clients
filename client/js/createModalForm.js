@@ -1,4 +1,4 @@
-import {svgContactDefault, svgContactHover} from "./svg.js";
+import {svgContactDefault, svgContactHover, svgSpinner} from "./svg.js";
 import {createContactItem} from "./createContact.js";
 
 export const createClientsForm = () => {
@@ -22,6 +22,7 @@ export const createClientsForm = () => {
     const formFloatingName = document.createElement('div');
     const formFloatingSurname = document.createElement('div');
     const formFloatingLastName = document.createElement('div');
+    const saveSpiner = document.createElement('span');
 
     const errorBlock = document.createElement('p');
     const unacceptableLetter = document.createElement('span');
@@ -31,6 +32,7 @@ export const createClientsForm = () => {
     const requiredValue = document.createElement('span');
     const requiredContacts = document.createElement('span');
 
+    saveSpiner.classList.add('modal__spinner');
     modalTitle.classList.add('modal__title');
     modalClose.classList.add('modal__close', 'btn-reset');
     form.classList.add('modal__form');
@@ -72,6 +74,7 @@ export const createClientsForm = () => {
     requiredValue.id = 'requiredValue';
     requiredContacts.id = 'requiredContacts';
 
+    saveSpiner.innerHTML = svgSpinner;
     modalTitle.textContent = 'Новый клиент';
     labelName.textContent = 'Имя';
     labelSurname.textContent = 'Фамилия';
@@ -85,6 +88,7 @@ export const createClientsForm = () => {
     contactBtnSvgHover.innerHTML = svgContactHover
 
     labelName.append(requireName);
+    saveBtn.append(saveSpiner);
     labelSurname.append(requireSurname);
     formFloatingName.append(inputName, labelName);
     formFloatingSurname.append(inputSurname, labelSurname);

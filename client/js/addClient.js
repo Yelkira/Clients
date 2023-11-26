@@ -41,9 +41,21 @@ export const addClientModal = () => {
         clientObject.lastName = createForm.inputLastName.value
         clientObject.contacts = contacts
 
-        const data = await sendCLientData(clientObject, 'POST')
-        document.querySelector('.clients__tbody').append(createClientItem(data))
-        document.querySelector('.modal').remove()
+        const spinner = document.querySelector('.modal__spinner')
+        try{
+            spinner.style.display = 'block'
+            const data = await sendCLientData(clientObject, 'POST')
+            setTimeout(() => {
+                document.querySelector('.clients__tbody').append(createClientItem(data))
+                document.querySelector('.modal').remove()
+            }, 1500)
+        } catch (e){
+            console.log(e)
+        } finally {
+            setTimeout(() => {
+                spinner.style.display = 'none'
+            }, 1500)
+        }
     })
 
     createForm.modalClose.addEventListener('click', (e) => {

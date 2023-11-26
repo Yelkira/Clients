@@ -73,10 +73,23 @@ export const editClientModal = (data) => {
         client.lastName = createForm.inputLastName.value;
         client.contacts = contacts;
 
-        const editedData= await sendCLientData(client, 'PATCH', data.id)
-        document.getElementById(editedData.id).remove()
-        document.querySelector('.clients__tbody').append(createClientItem(editedData))
-        document.querySelector('.edit-modal').remove()
+
+        const spinner = document.querySelector('.modal__spinner')
+        try{
+            spinner.style.display = 'block'
+            const editedData= await sendCLientData(client, 'PATCH', data.id)
+            setTimeout(() => {
+                document.getElementById(editedData.id).remove()
+                document.querySelector('.clients__tbody').append(createClientItem(editedData))
+                document.querySelector('.modal-edit').remove()
+            }, 1500)
+        } catch (e){
+            console.log(e)
+        } finally {
+            setTimeout(() => {
+                spinner.style.display = 'none'
+            }, 1500)
+        }
     })
 
     createForm.modalTitle.append(titleId);
