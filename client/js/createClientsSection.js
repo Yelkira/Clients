@@ -9,12 +9,12 @@ export const createClientsSection = () => {
     const main = document.createElement('main');
     const sortingDisplay = document.createElement('thead');
     const theadTr = document.createElement('tr');
-    const sortingDisplayId = document.createElement('td');
-    const sortingDisplayName = document.createElement('td');
-    const sortingDisplayCreate = document.createElement('td');
-    const sortingDisplayEdit = document.createElement('td');
-    const sortingDisplayContacts = document.createElement('td');
-    const sortingDisplayActions = document.createElement('td');
+    const sortingDisplayId = document.createElement('th');
+    const sortingDisplayName = document.createElement('th');
+    const sortingDisplayCreate = document.createElement('th');
+    const sortingDisplayEdit = document.createElement('th');
+    const sortingDisplayContacts = document.createElement('th');
+    const sortingDisplayActions = document.createElement('th');
     const sortingDisplaySpan = document.createElement('span');
     const addUserBtn = document.createElement('button');
     const addUserBtnSvg = document.createElement('span');
@@ -25,6 +25,11 @@ export const createClientsSection = () => {
     const editSpan = document.createElement('span');
 
 
+
+    sortingDisplayId.setAttribute('data-type', 'id');
+    sortingDisplayName.setAttribute('data-type', 'text');
+    sortingDisplayCreate.setAttribute('data-type', 'create');
+    sortingDisplayEdit.setAttribute('data-type', 'update');
     section.classList.add('clients');
     tableWrapper.classList.add('clients__wrapper');
     h1.classList.add('clients__heading');

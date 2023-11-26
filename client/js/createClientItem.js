@@ -6,6 +6,7 @@ import {svgSpinner} from "./svg.js";
 export const createClientItem = (data) => {
     const clientTr = document.createElement('tr');
     const clientId = document.createElement('span');
+    const clientIdTd = document.createElement('td');
     const clientFullName = document.createElement('td');
     const clientName = document.createElement('span');
     const clientSureName = document.createElement('span');
@@ -30,7 +31,7 @@ export const createClientItem = (data) => {
     deleteSpinner.classList.add('actions__spinner');
     clientTr.classList.add('clients__item');
     clientTr.id = data.id;
-    clientId.classList.add('client__id');
+    clientIdTd.classList.add('client__id');
     clientFullName.classList.add('clients__full-name');
     clientName.classList.add('clients__name');
     clientSureName.classList.add('clients__surname');
@@ -95,10 +96,10 @@ export const createClientItem = (data) => {
             clientEdit.classList.remove('action-wait')
         }, 1000)
     })
-
+    /*data.id.substring(0, 6)*/
     deleteSpinner.innerHTML = svgSpinner
     editSpinner.innerHTML = svgSpinner
-    clientId.textContent = data.id.substring(0, 6)
+    clientId.textContent = Math.floor(Math.random()*15)
     clientName.textContent = data.name;
     clientSureName.textContent = data.surname;
     clientLastName.textContent = data.lastName;
@@ -109,6 +110,7 @@ export const createClientItem = (data) => {
     changedDate.textContent = formatDate(data.updatedAt);
     changedTime.textContent = formatTime(data.updatedAt);
 
+    clientIdTd.append(clientId)
     clientFullName.append(clientName, clientSureName, clientLastName)
     clientCreated.append(createdDate, createdTime)
     clientChanged.append(changedDate, changedTime)
@@ -116,7 +118,7 @@ export const createClientItem = (data) => {
     clientEdit.append(editSpinner)
     clientActions.append(clientEdit, clientDelete)
     clientTr.append(
-        clientId,
+        clientIdTd,
         clientFullName,
         clientCreated,
         clientChanged,

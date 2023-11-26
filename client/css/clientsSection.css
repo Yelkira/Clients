@@ -26,6 +26,7 @@
 
 .display-info__item {
     font-size: 12px;
+    font-weight: 400;
     color: var(--color-silver-chalice);
 }
 
