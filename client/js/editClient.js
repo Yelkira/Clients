@@ -1,5 +1,7 @@
 import {createClientsForm} from "./createModalForm.js";
 import {deleteClientModal} from "./createDeleteModal.js";
+import {createContactItem} from "./createContact.js";
+import {sendCLientData} from "./clientsApi.js";
 
 export const editClientModal = (data) => {
     const editModal = document.createElement('div');
@@ -21,7 +23,7 @@ export const editClientModal = (data) => {
         const deleteModal = deleteClientModal();
         document.body.append(deleteModal.deleteModal);
 
-        import('./clientsApi.js').then(({deleteClientItem})=>{
+        import('./clientsApi.js').then(({deleteClientItem}) => {
             deleteModal.deleteModalDelete.addEventListener('click', (e) => {
                 deleteClientItem(data.id).then(r => {
                     document.getElementById(data.id).remove()
@@ -30,11 +32,65 @@ export const editClientModal = (data) => {
         })
     })
 
+    createForm.modalClose.addEventListener('click', () => {
+        editModal.remove()
+    })
+
+    createForm.inputName.value = data.name;
+    createForm.inputSurname.value = data.surname;
+    createForm.inputLastName.value = data.lastName;
+
+    for (const contact of data.contacts) {
+        const createContact = createContactItem()
+
+        createContact.contactName.textContent = contact.type
+        createContact.contactInput.value = contact.value
+
+        createForm.contactsBlock.prepend(createContact.contact);
+        createForm.contactsBlock.style.backgroundColor = 'var(--color-athens-gray)'
+    }
+
+    if (data.contacts.length === 10) {
+        createForm.addContactBtn.classList.remove('modal__btn-contact--active')
+    }
+
+    createForm.form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+
+        const contactTypes = document.querySelectorAll('.contact__name');
+        const contactValues = document.querySelectorAll('.contact__input');
+        let contacts = [];
+        let client = {};
+        for (let i = 0; i < contactTypes.length; i++) {
+            contacts.push({
+                type: contactTypes[i].innerHTML,
+                value: contactValues[i].value
+            })
+        }
+        client.name = createForm.inputName.value;
+        client.surname = createForm.inputSurname.value;
+        client.lastName = createForm.inputLastName.value;
+        client.contacts = contacts;
+
+        try {
+            await sendCLientData(client, 'PATCH', data.id)
+            editModal.remove()
+        } catch (error) {
+            console.log(error)
+        }
+    })
+
     createForm.modalTitle.append(titleId);
     editModalContent.append(createForm.modalClose, createForm.modalTitle, createForm.form);
     editModal.append(editModalContent);
 
-    return{
+    document.addEventListener('click', (e) => {
+        if (e.target === editModal) {
+            editModal.remove()
+        }
+    })
+
+    return {
         editModal,
         editModalContent
     }

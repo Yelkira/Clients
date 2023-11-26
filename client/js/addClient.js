@@ -1,5 +1,5 @@
 import {createClientsForm} from "./createModalForm.js";
-import {createClient} from "./clientsApi.js";
+import {sendCLientData} from "./clientsApi.js";
 
 export const addClientModal = () => {
     const createForm = createClientsForm()
@@ -31,7 +31,7 @@ export const addClientModal = () => {
         clientObject.lastName = createForm.inputLastName.value
         clientObject.contacts = contacts
 
-        await createClient(clientObject)
+        await sendCLientData(clientObject, 'POST')
     })
 
     createForm.modalClose.addEventListener('click', (e) => {

@@ -1,6 +1,6 @@
 import { createClientsHeader } from "./createHeader.js";
 import { createClientsSection } from "./createClientsSection.js";
-import {createClient, getClients} from "./clientsApi.js";
+import { getClients} from "./clientsApi.js";
 import {createClientItem} from "./createClientItem.js";
 
 const createApp = async () => {
