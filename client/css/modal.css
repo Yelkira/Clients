@@ -50,6 +50,14 @@
     cursor: pointer;
 }
 
+.modal__id{
+    display: inline-block;
+    font-size: 12px;
+    margin-left: 10px;
+    font-weight: 400;
+    color: var(--color-silver-chalice);
+}
+
 .modal__title {
     margin: 0 0 30px;
     font-size: 18px;
