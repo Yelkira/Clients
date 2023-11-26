@@ -43,7 +43,7 @@
     stroke: var(--back-color);
 }
 #loader svg circle.front {
-    stroke: var(--front-color);
+    stroke: var(--color-emerald);
 }
 #loader svg.circle-outer {
     height: 86px;
@@ -108,7 +108,7 @@
     color: var(--text-color);
 }
 #loader .text::after {
-    color: var(--front-color);
+    color: var(--color-emerald);
     -webkit-animation: text-animation 3.6s ease infinite;
     animation: text-animation 3.6s ease infinite;
     position: absolute;
