@@ -80,10 +80,18 @@
 .clients__edit {
     margin-right: 32px;
     background-image: url(../img/pencil.svg);
+    transition: color .3s ease-in-out;
 }
 .clients__delete {
     margin-right: 32px;
     background-image: url(../img/redCandel.svg);
+    transition: color .3s ease-in-out;
+}
+.clients__edit:hover{
+    color: var(--color-emerald);
+}
+.clients__delete:hover{
+    color: var(--color-burnt-sienna);
 }
 .contacts__link{
     position: relative;
