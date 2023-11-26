@@ -30,3 +30,14 @@ export const deleteClientItem = async (id) => {
         console.log(e)
     }
 }
+
+export const findClient = async (value) => {
+    try {
+        const res = await fetch(`http://localhost:3000/api/clients?search=${value}`,{
+            method: 'GET'
+        })
+        return await res.json()
+    } catch (e) {
+        console.log(e)
+    }
+}
