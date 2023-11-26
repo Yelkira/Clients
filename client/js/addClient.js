@@ -1,6 +1,7 @@
 import {createClientsForm} from "./createModalForm.js";
 import {sendCLientData} from "./clientsApi.js";
 import {validateClientForm} from "./validateForm.js";
+import {validateClientContact} from "./validateContact.js";
 
 export const addClientModal = () => {
     const createForm = createClientsForm()
@@ -24,6 +25,10 @@ export const addClientModal = () => {
         let contacts = []
         let clientObject = {}
         for (let i = 0; i < contactTypes.length; i++) {
+            if (!validateClientContact(contactTypes[i], contactValues[i])){
+                return
+            }
+
             contacts.push({
                 type: contactTypes[i].innerHTML,
                 value: contactValues[i].value
