@@ -10,7 +10,9 @@ const createApp = async () => {
     const clientSection = createClientsSection();
     document.body.append(header, clientSection.main);
     const preloader = document.querySelector('.preloader');
+    const tableWrapper = document.querySelector('.clients__wrapper');
     try {
+        tableWrapper.style.overflow = 'visible';
         const clients = await getClients()
         searchClients(clients)
         for (const client of clients) {
@@ -19,9 +21,8 @@ const createApp = async () => {
     } catch (e) {
         console.log(e)
     } finally {
-        setTimeout(() => {
-            preloader.remove();
-        }, 1500)
+        preloader.remove();
+        tableWrapper.style.overflow = 'auto';
     }
 }
 

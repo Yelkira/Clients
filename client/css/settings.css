@@ -81,8 +81,8 @@ a {
 }
 
 .site-modal{
-    position: absolute;
-    overflow-x: auto;
+    position: fixed;
+    overflow: auto;
     cursor: pointer;
     top: 0;
     left: 0;
