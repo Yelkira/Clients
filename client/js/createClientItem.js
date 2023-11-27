@@ -30,7 +30,7 @@ export const createClientItem = (data) => {
     editSpinner.classList.add('actions__spinner');
     deleteSpinner.classList.add('actions__spinner');
     clientTr.classList.add('clients__item');
-    clientTr.id = data.id;
+    clientTr.id = data._id;
     clientIdTd.classList.add('client__id');
     clientFullName.classList.add('clients__full-name');
     clientName.classList.add('clients__name');
@@ -58,19 +58,14 @@ export const createClientItem = (data) => {
             deleteClient.deleteModalDelete.addEventListener('click', () => {
                 try {
                     deleteClient.deleteSpinner.style.display = 'block'
-                    setTimeout(() => {
-                        deleteClientItem(data.id).then(r => {
-                            document.getElementById(data.id).remove()
-                            deleteClient.deleteModal.remove()
-                        })
-                    }, 1500)
+                    deleteClientItem(data._id)
+                    document.getElementById(data._id).remove()
+                    deleteClient.deleteModal.remove()
 
                 } catch (e) {
                     console.log(e)
                 } finally {
-                    setTimeout(() => {
-                        deleteClient.deleteSpinner.style.display = 'none'
-                    }, 1500)
+                    deleteClient.deleteSpinner.style.display = 'none'
                 }
 
             })
@@ -99,7 +94,7 @@ export const createClientItem = (data) => {
 
     deleteSpinner.innerHTML = svgSpinner
     editSpinner.innerHTML = svgSpinner
-    clientId.textContent = data.id.substring(0, 6)
+    clientId.textContent = data._id.substring(0, 6)
     clientName.textContent = data.name;
     clientSureName.textContent = data.surname;
     clientLastName.textContent = data.lastName;

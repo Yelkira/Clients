@@ -15,8 +15,10 @@ export const editClientModal = (data) => {
     titleId.classList.add('modal__id');
     editModal.classList.add('modal-edit', 'site-modal', 'modal-active');
     editModalContent.classList.add('edit-modal__content', 'site-modal__content', 'modal-active');
+    console.log(data._id.substring(0, 6))
 
-    titleId.textContent = `ID: ${data.id.substring(0, 6)}`;
+        const shortenedId = data._id.substring(0, 6);
+        titleId.textContent = "ID: " + shortenedId;
     createForm.modalTitle.textContent = 'Изменить данные';
     createForm.cancelBtn.textContent = 'Удалить клиента';
 
@@ -30,20 +32,14 @@ export const editClientModal = (data) => {
             deleteModal.deleteModalDelete.addEventListener('click', (e) => {
                 try {
                     deleteModal.deleteSpinner.style.display = 'block'
-                    setTimeout(() => {
-                        deleteClientItem(data.id).then(r => {
-                            document.getElementById(data.id).remove()
-                            deleteModal.deleteModal.remove()
-                            document.querySelector('.modal-edit').remove()
-                        })
-                    }, 1500)
-
+                    deleteClientItem(data._id)
+                    document.getElementById(data._id).remove()
+                    deleteModal.deleteModal.remove()
+                    editModal.remove()
                 } catch (e) {
                     console.log(e)
                 } finally {
-                    setTimeout(() => {
-                        deleteModal.deleteSpinner.style.display = 'none'
-                    }, 1500)
+                    deleteModal.deleteSpinner.style.display = 'none'
                 }
             })
         })
@@ -98,18 +94,13 @@ export const editClientModal = (data) => {
         const spinner = document.querySelector('.modal__spinner')
         try {
             spinner.style.display = 'block'
-            const editedData = await sendCLientData(client, 'PATCH', data.id)
-            setTimeout(() => {
-                document.getElementById(editedData.id).remove()
-                document.querySelector('.clients__tbody').append(createClientItem(editedData))
-                document.querySelector('.modal-edit').remove()
-            }, 1500)
+            const editedData = await sendCLientData(client, 'PATCH', data._id)
+            document.querySelector('.clients__tbody').replaceChild(createClientItem(editedData), document.getElementById(editedData._id))
+            editModal.remove()
         } catch (e) {
             console.log(e)
         } finally {
-            setTimeout(() => {
-                spinner.style.display = 'none'
-            }, 1500)
+            spinner.style.display = 'none'
         }
     })
 
