@@ -1,3 +1,5 @@
+import {mainLogo} from "./svg.js";
+
 export const createClientsHeader = () => {
     const header = document.createElement('header');
     const logo = document.createElement('a');
@@ -14,8 +16,7 @@ export const createClientsHeader = () => {
     container.classList.add('container', 'header__container');
     logo.classList.add('logo', 'header__logo');
     logoImg.classList.add('logo__img');
-    logoImg.src = 'img/logo.svg';
-    logoImg.alt = 'Logotype Clients';
+    logo.innerHTML= mainLogo
     form.classList.add('header__form');
     input.classList.add('header__input');
     wrapper.classList.add('header__wrapper');

@@ -18,6 +18,7 @@
 .header__logo {
     display: block;
     margin-right: 33px;
+    margin-bottom: -30px;
 }
 
 .header__form {
