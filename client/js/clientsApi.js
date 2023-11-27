@@ -1,6 +1,6 @@
 export const getClients = async () => {
     try {
-        const res = await fetch('http://localhost:3000/api/clients', {
+        const res = await fetch('https://clients-server.vercel.app/api/clients', {
             method: 'GET'
         })
         return await res.json()
@@ -11,7 +11,7 @@ export const getClients = async () => {
 
 export const sendCLientData = async (client, method, id = null) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/clients${method === 'POST' ? '' : '/' + id}`, {
+        const res = await fetch(`https://clients-server.vercel.app/api/clients${method === 'POST' ? '' : '/' + id}`, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -26,7 +26,7 @@ export const sendCLientData = async (client, method, id = null) => {
 
 export const deleteClientItem = async (id) => {
     try {
-        await fetch(`http://localhost:3000/api/clients/${id}`, {
+        await fetch(`https://clients-server.vercel.app/api/clients/${id}`, {
             method: 'DELETE',
         })
     } catch (e) {
@@ -36,7 +36,7 @@ export const deleteClientItem = async (id) => {
 
 export const findClient = async (value) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/clients?search=${value}`, {
+        const res = await fetch(`https://clients-server.vercel.app/api/clients?search=${value}`, {
             method: 'GET'
         })
         return await res.json()
